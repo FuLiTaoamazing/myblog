@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.flt.mapper.MessageMapper">
+
+    <insert id="addMessage" parameterType="message">
+        INSERT INTO t_message(NIKE_NAME,EMAIL,CONTENT,CREATE_TIME,REPLY_ID,IMAG,TARGET_NAME) VALUES(#{nikeName},#{email},#{content},#{createTime},#{replyId},#{imag},#{targetName})
+    </insert>
+
+
+    <select id="findAll" resultType="message">
+        SELECT * FROM t_message;
+    </select>
+
+    <select id="findAllParentMessage" resultType="message">
+       SELECT id,nike_name,email,content,create_time,reply_id,imag FROM t_message WHERE reply_id=-1 ORDER BY ID DESC
+    </select>
+
+    <select id="findAllChildMessageByReplyId" resultType="message" parameterType="string">
+       SELECT id,nike_name,email,content,create_time,reply_id,imag,target_name FROM t_message WHERE reply_id=#{replyId} ORDER BY ID ASC
+    </select>
+
+</mapper>

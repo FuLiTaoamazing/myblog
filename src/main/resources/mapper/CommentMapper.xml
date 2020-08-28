@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.flt.mapper.CommentMapper">
+
+    <select id="findParentComment" resultType="comment" parameterType="int">
+        SELECT id,content,create_time,nike_name,imag from t_comment where reply_id=-1 and blog_id=#{blogId} order by id asc ;
+    </select>
+
+    <select id="findChildComment" resultType="comment" parameterType="int">
+        SELECT blog_id,content,create_time,nike_name,reply_id,target_name,imag from t_comment where reply_id=#{targetId} and blog_id=#{blogId} order by id ASC;
+    </select>
+
+
+    <insert id="saveComment" parameterType="comment">
+        INSERT INTO t_comment(blog_id,nike_name,email,create_time,content,target_name,reply_id,imag) values(#{blogId},#{nikeName},#{email},#{createTime},#{content},#{targetName},#{replyId},#{imag})
+    </insert>
+
+
+</mapper>

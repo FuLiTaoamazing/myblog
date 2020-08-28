@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.flt.mapper.TagMapper">
+
+    <select id="findAllOrderCount" resultType="tag">
+        select id,tag_name from t_tag order by blog_count desc limit 0,5;
+    </select>
+    <select id="findTagById" parameterType="int" resultType="tag">
+        SELECT tag_name from t_tag where id=#{id};
+    </select>
+
+</mapper>

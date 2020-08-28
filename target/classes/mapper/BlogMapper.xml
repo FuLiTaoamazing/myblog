@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.flt.mapper.BlogMapper">
+
+    <select id="findAll" resultType="blog">
+        SELECT * FROM t_blog;
+    </select>
+
+    <select id="findBlogIndex" resultType="blog">
+        select id, title,content,description,views,first_picture,tags,create_time,recommentd from t_blog order by recommentd desc, id desc;
+    </select>
+
+    <select id="findBlogsByTagId" resultType="blog" parameterType="string">
+        select id, title,content,description,views,first_picture,tags,create_time,recommentd from t_blog WHERE tags like concat('%','${tagId}','%') order by recommentd desc, id desc;
+    </select>
+
+    <select id="findHotList" resultType="blog">
+        select id,title from t_blog order by views desc limit 0,10;
+    </select>
+
+    <select id="findTopBlog" resultType="blog">
+        select id,title from t_blog where recommentd=1 order by views desc limit 0,3;
+    </select>
+
+    <select id="findBlogById" resultType="blog">
+        SELECT title,content,views,create_time,update_time,conmentabled from t_blog where id=#{id};
+    </select>
+
+    <insert id="saveBlog" parameterType="blog">
+        insert into t_blog(content,title,create_time,recommentd,conmentabled,tags,description,views) values(#{content},#{title},#{createTime},#{recommentd},#{conmentabled},#{tags},#{description},#{views})
+    </insert>
+
+</mapper>
