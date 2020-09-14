@@ -2,7 +2,9 @@ package com.flt.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 import java.util.List;
@@ -16,6 +18,8 @@ import java.util.List;
  * date: 2020/7/31 11:04
  */
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Message {
     private Integer id;
     private String nikeName;
